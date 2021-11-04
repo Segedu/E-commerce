@@ -1,0 +1,36 @@
+GET http://localhost:8080/products
+
+###
+DELETE http://localhost:8080/products/id
+
+###
+
+PATCH http://localhost:8080/products/id
+
+###
+POST  http://localhost:8080/products
+
+###
+GET http://localhost:8080/carts/6183162cd7907e590851e05a
+
+###
+
+POST http://localhost:8080/carts
+
+###
+
+PATCH  http://localhost:8080/carts
+
+###
+GET http://localhost:8080/contacts
+
+###
+POST http://localhost:8080/contacts
+
+
+
+### POST http://localhost:8080/products/Content-Type: application/json
+
+# { # "userId": 1, # "title": "Highway 37", # "completed": false
+
+# }

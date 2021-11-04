@@ -1,0 +1,180 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+#bgImage {
+  width: 100vw;
+  height: 100%;
+  opacity: 0.7;
+}
+#tableHead {
+  display: flex;
+  list-style: none;
+  justify-content: space-evenly;
+  background-color: var(--black);
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 2%;
+}
+#tableHead li {
+  padding: 2%;
+  color: var(--white);
+}
+#dataTable {
+  position: relative;
+  border: solid 4px var(--gray);
+  width: 70%;
+  margin-left: 15%;
+}
+td {
+  width: 100%;
+}
+#tabArticle {
+  position: relative;
+  display: flex;
+  margin-bottom: 1rem;
+  padding: 1%;
+}
+img {
+  display: inline;
+  width: 15%;
+  height: 110px;
+}
+input {
+  margin-left: 8%;
+  margin-top: 1%;
+  width: 7%;
+  height: 6%;
+  padding: 10px;
+}
+
+p {
+  display: inline;
+  margin-left: 7%;
+}
+#pName {
+  margin-left: 0;
+}
+h1 {
+  display: inline;
+  margin-left: 15%;
+}
+#cartIcon {
+  width: 30px;
+  height: 25px;
+}
+#saveForLater {
+  margin-left: 3%;
+}
+#removeBtn {
+  margin-left: 15%;
+  height: 32%;
+}
+#totalSum {
+  border-bottom: 2px solid var(--black);
+  margin-top: 1%;
+  margin-left: 55%;
+  font-size: 30px;
+  width: 28%;
+}
+#checkoutBtn {
+  background-color: var(--black);
+  color: var(--white);
+  padding: 3%;
+  margin-left: 75%;
+}
+@media only screen and (max-width: 425px) {
+  * {
+    position: relative;
+  }
+  #bgImage {
+    margin-top: 0;
+    opacity: 0.7;
+  }
+  #tableHead {
+    margin-left: 5%;
+    margin-top: 5%;
+  }
+  #cartIcon {
+    width: 20px;
+    height: 20px;
+  }
+  #totalSum {
+    margin-top: 3%;
+  }
+  #checkoutBtn {
+    padding: 2%;
+    margin-left: 30%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  * {
+    position: relative;
+  }
+  #tableHead {
+    width: 90%;
+  }
+  #tableHead li {
+    margin-left: 0;
+    padding: 2%;
+  }
+  #tableCartDiv {
+    position: relative;
+    width: 100%;
+  }
+  #dataTable {
+    width: 90%;
+    height: 50vh;
+    margin-left: 5%;
+  }
+  td {
+    width: 100%;
+  }
+  #cartIcon {
+    width: 20px;
+    height: 20px;
+    margin-top: -5%;
+  }
+  #saveForLater {
+    margin-left: 0%;
+    margin-top: -4%;
+  }
+  #tabArticle {
+    position: relative;
+    display: flex;
+    margin-bottom: 1rem;
+    padding: 1%;
+  }
+  img {
+    width: 22%;
+    height: 93%;
+  }
+  #pName {
+    display: none;
+  }
+  p {
+    display: inline;
+    margin-left: 7%;
+  }
+  input {
+    margin-left: 9%;
+    margin-top: 1%;
+    width: 11%;
+    padding: -1%;
+    height: 6%;
+  }
+  h1 {
+    margin-left: 7%;
+  }
+  #removeBtn {
+    position: absolute;
+    margin-left: 88%;
+  }
+  #totalSum {
+    margin-top: 1%;
+  }
+  #totCont {
+    height: 30px;
+    background: none;
+  }
+}
