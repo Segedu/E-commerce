@@ -1,0 +1,63 @@
+#form {
+  width: 40%;
+  margin-left: 30%;
+  margin-top: 10%;
+  border-radius: 10px;
+  height: 55vh;
+  background-color: #628281;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+h1 {
+  position: relative;
+  font-size: 26px;
+  color: black;
+  padding: 2%;
+  margin-left: -80%;
+}
+#formSect {
+  position: relative;
+  width: 50%;
+  padding: 2%;
+  margin-left: 45%;
+  margin-top: 5%;
+  border-radius: 4px;
+}
+
+input {
+  width: 100%;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  border-bottom: 2px solid #666;
+  color: #ddd;
+  font-size: 14px;
+  color: white;
+}
+
+input::placeholder {
+  color: white;
+  font-size: large;
+}
+
+#message {
+  width: 80%;
+  height: 15vh;
+}
+
+#submit {
+  width: 20%;
+  margin: 2%;
+  margin-left: 80%;
+  border-radius: 4px;
+  background-color: #2e2b2b;
+}
+
+#myDetails a {
+  background-color: #2e2b2b;
+  font-size: larger;
+  color: white;
+  border-radius: 4px;
+  padding: 1%;
+  margin: 1%;
+}
