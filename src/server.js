@@ -13,6 +13,7 @@ const express = require("express"),
     insertNewProduct,
     insertNewCart,
     insertNewContact,
+    deleteProductById,
   } = require("./functions");
 
 app.use(express.json());
@@ -36,6 +37,7 @@ app.post(productsRoute, (req, res) => {
     productObj = { name: name };
   insertNewProduct(req, res, productObj);
 });
+
 app.post(contactsRoute, (req, res) => {
   const name = req.body.name,
     contactObj = { name: name };
@@ -46,6 +48,11 @@ app.post(cartsRoute, (req, res) => {
   const name = req.body.name,
     cartObj = { name: name };
   insertNewCart(req, res, cartObj);
+});
+
+app.delete(`${productsRoute}/:id`, (req, res) => {
+  const id = req.params.id;
+  deleteProductById(req, res, id);
 });
 
 app.listen(PORT, () => {

@@ -95,6 +95,18 @@ function insertNewContact(req, res, contactObj) {
   });
 }
 
+function deleteProductById(req, res, id) {
+  MongoClient.connect(url, (err, db) => {
+    if (err) throw err;
+    const currentDB = db.db(dbName);
+    currentDB
+      .collection(prodColl)
+      .findOneAndDelete({ _id: ObjectId(id) }, (err, product) => {
+        if (err) throw err;
+        res.send(product);
+      });
+  });
+}
 module.exports = {
   getAllProducts,
   getAllContacts,
@@ -102,4 +114,5 @@ module.exports = {
   insertNewProduct,
   insertNewCart,
   insertNewContact,
+  deleteProductById,
 };
