@@ -11,8 +11,10 @@ const express = require("express"),
     getAllContacts,
     getCartById,
     insertNewProduct,
-    insertNewCart,
     insertNewContact,
+    insertNewCart,
+    updateCart,
+    updateProductById,
     deleteProductById,
   } = require("./functions");
 
@@ -48,6 +50,17 @@ app.post(cartsRoute, (req, res) => {
   const name = req.body.name,
     cartObj = { name: name };
   insertNewCart(req, res, cartObj);
+});
+
+app.patch(cartsRoute, (req, res) => {
+  updateCart(req, res);
+});
+
+app.patch(`${productsRoute}/:id`, (req, res) => {
+  const id = req.params.id,
+    name = req.body.name,
+    updateProd = { name: name };
+  updateProductById(req, res, id, updateProd);
 });
 
 app.delete(`${productsRoute}/:id`, (req, res) => {

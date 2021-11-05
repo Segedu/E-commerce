@@ -107,6 +107,26 @@ function deleteProductById(req, res, id) {
       });
   });
 }
+
+function updateProductById(req, res, id, updateProd) {
+  MongoClient.connect(url, (err, db) => {
+    if (err) throw err;
+    const currentDB = db.db(dbName);
+    currentDB
+      .collection(prodColl)
+      .findOneAndUpdate(
+        { _id: ObjectId(id) },
+        { $set: updateProd },
+        (err, product) => {
+          if (err) throw err;
+          res.send(product);
+        }
+      );
+  });
+}
+
+function updateCart() {}
+
 module.exports = {
   getAllProducts,
   getAllContacts,
@@ -114,5 +134,7 @@ module.exports = {
   insertNewProduct,
   insertNewCart,
   insertNewContact,
+  updateProductById,
+  updateCart,
   deleteProductById,
 };
