@@ -1,7 +1,7 @@
 GET http://localhost:8080/products
 
 ###
-DELETE http://localhost:8080/products/id
+DELETE http://localhost:8080/products/618539287c1db9f18b9e9260
 
 ###
 
@@ -9,6 +9,12 @@ PATCH http://localhost:8080/products/id
 
 ###
 POST  http://localhost:8080/products
+Content-Type: application/json
+
+{
+"name":"new product"
+
+}
 
 ###
 GET http://localhost:8080/carts/6183162cd7907e590851e05a
@@ -16,6 +22,12 @@ GET http://localhost:8080/carts/6183162cd7907e590851e05a
 ###
 
 POST http://localhost:8080/carts
+Content-Type: application/json
+
+{
+"name":"third cart"
+
+}
 
 ###
 
@@ -26,11 +38,9 @@ GET http://localhost:8080/contacts
 
 ###
 POST http://localhost:8080/contacts
+Content-Type: application/json
 
+{
+"name": "new contact"
 
-
-### POST http://localhost:8080/products/Content-Type: application/json
-
-# { # "userId": 1, # "title": "Highway 37", # "completed": false
-
-# }
+}

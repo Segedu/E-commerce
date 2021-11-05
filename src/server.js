@@ -6,7 +6,14 @@ const express = require("express"),
   cartsRoute = "/carts",
   contactsRoute = "/contacts",
   PORT = 8080,
-  { getAllProducts, getAllContacts, getCartById } = require("./functions");
+  {
+    getAllProducts,
+    getAllContacts,
+    getCartById,
+    insertNewProduct,
+    insertNewCart,
+    insertNewContact,
+  } = require("./functions");
 
 app.use(express.json());
 
@@ -24,7 +31,23 @@ app.get(`${cartsRoute}/:id`, (req, res) => {
   getCartById(req, res);
 });
 
-// app.post()
+app.post(productsRoute, (req, res) => {
+  const name = req.body.name,
+    productObj = { name: name };
+  insertNewProduct(req, res, productObj);
+});
+app.post(contactsRoute, (req, res) => {
+  const name = req.body.name,
+    contactObj = { name: name };
+  insertNewContact(req, res, contactObj);
+});
+
+app.post(cartsRoute, (req, res) => {
+  const name = req.body.name,
+    cartObj = { name: name };
+  insertNewCart(req, res, cartObj);
+});
+
 app.listen(PORT, () => {
   console.log(`app is listening on port: ${PORT} http://localhost:8080/`);
 });

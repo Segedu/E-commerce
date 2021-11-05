@@ -1,9 +1,9 @@
 const mongoDB = require("mongodb"),
   MongoClient = mongoDB.MongoClient,
   ObjectId = mongoDB.ObjectId,
-  productsCollec = "products",
-  contactsCollec = "contacts",
-  cartsCollec = "carts",
+  prodColl = "products",
+  contColl = "contacts",
+  cartColl = "carts",
   url = "mongodb://localhost:27017/",
   dbName = "E-commerce";
 
@@ -12,7 +12,7 @@ function getAllProducts(req, res) {
     if (err) throw err;
     const currentDB = db.db(dbName);
     currentDB
-      .collection(productsCollec)
+      .collection(prodColl)
       .find({})
       .toArray((err, products) => {
         if (err) {
@@ -32,7 +32,7 @@ function getAllContacts(req, res) {
     }
     const currentDB = db.db(dbName);
     currentDB
-      .collection(contactsCollec)
+      .collection(contColl)
       .find({})
       .toArray((err, contacts) => {
         if (err) {
@@ -51,7 +51,7 @@ function getCartById(req, res) {
     const currentDB = db.db(dbName);
     const id = req.params.id;
     currentDB
-      .collection(cartsCollec)
+      .collection(cartColl)
       .findOne({ _id: ObjectId(id) }, (err, cart) => {
         if (err) {
           console.log("error at getting this cart");
@@ -62,4 +62,44 @@ function getCartById(req, res) {
       });
   });
 }
-module.exports = { getAllProducts, getAllContacts, getCartById };
+
+function insertNewProduct(req, res, productObj) {
+  MongoClient.connect(url, (err, db) => {
+    if (err) throw err;
+    const currentDB = db.db(dbName);
+    currentDB.collection(prodColl).insertOne(productObj, (err, product) => {
+      if (err) throw err;
+      res.send(product);
+    });
+  });
+}
+
+function insertNewCart(req, res, cartObj) {
+  MongoClient.connect(url, (err, db) => {
+    if (err) throw err;
+    const currentDB = db.db(dbName);
+    currentDB.collection(cartColl).insertOne(cartObj, (err, cart) => {
+      if (err) throw err;
+      res.send(cart);
+    });
+  });
+}
+function insertNewContact(req, res, contactObj) {
+  MongoClient.connect(url, (err, db) => {
+    if (err) throw err;
+    const currentDB = db.db(dbName);
+    currentDB.collection(contColl).insertOne(contactObj, (err, contact) => {
+      if (err) throw err;
+      res.send(contact);
+    });
+  });
+}
+
+module.exports = {
+  getAllProducts,
+  getAllContacts,
+  getCartById,
+  insertNewProduct,
+  insertNewCart,
+  insertNewContact,
+};

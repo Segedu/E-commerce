@@ -1,11 +1,11 @@
-var bedRCont = document.getElementById("bedRCont");
-var bathCont = document.getElementById("bathCont");
-var kitchenCont = document.getElementById("kitchenCont");
-var livingCont = document.getElementById("livingCont");
-var itemCounter = document.getElementById("itemCounter");
-var likeCounter = document.getElementById("likeCounter");
-var itemsArray = [];
-var likedItemsArray = [];
+const bedRCont = document.getElementById("bedRCont"),
+  bathCont = document.getElementById("bathCont"),
+  kitchenCont = document.getElementById("kitchenCont"),
+  livingCont = document.getElementById("livingCont"),
+  itemCounter = document.getElementById("itemCounter"),
+  likeCounter = document.getElementById("likeCounter"),
+  itemsArray = [],
+  likedItemsArray = [];
 
 function printToWindowByCategory(divElement, category) {
   for (let i = 0; i < products.length; i++) {
