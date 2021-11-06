@@ -1,10 +1,13 @@
 const express = require("express"),
   path = require("path"),
   publicPath = path.join(__dirname, "..", "public"),
+  partialsPath = path.join(__dirname, "..", "templates", "partials"),
+  viewsPath = path.join(__dirname, "..", "views"),
   app = express(),
   productsRoute = "/products",
   cartsRoute = "/carts",
   contactsRoute = "/contacts",
+  hbs = require("hbs"),
   PORT = 8080,
   {
     getAllProducts,
@@ -16,11 +19,26 @@ const express = require("express"),
     updateCart,
     updateProductById,
     deleteProductById,
+    printToWindowByCategory,
   } = require("./functions");
+//  const name, price;
 
 app.use(express.json());
 
 app.use(express.static(publicPath));
+
+// app.set("view engine", "hbs");
+// app.engine("views", () => {}, viewsPath);
+// hbs.registerPartials(partialsPath);
+
+// app.get("/livingroom.hbs", (req, res) => {
+//   res.render("livingroom.hbs");
+// });
+
+app.get(`${productsRoute}/:category`, (req, res) => {
+  const category = req.params.category;
+  printToWindowByCategory(req, res, category);
+});
 
 app.get(productsRoute, (req, res) => {
   getAllProducts(req, res);

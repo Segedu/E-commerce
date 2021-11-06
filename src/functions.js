@@ -7,6 +7,23 @@ const mongoDB = require("mongodb"),
   url = "mongodb://localhost:27017/",
   dbName = "E-commerce";
 
+let resultArray = [];
+function printToWindowByCategory(req, res, category) {
+  MongoClient.connect(url, (err, db) => {
+    if (err) throw err;
+    const currentDB = db.db(dbName);
+    currentDB
+      .collection(prodColl)
+      .find({ category: category })
+      .toArray((err, products) => {
+        if (err) throw err;
+        resultArray.push(products);
+        res.send(resultArray);
+        console.log(resultArray);
+      });
+  });
+}
+
 function getAllProducts(req, res) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
@@ -137,4 +154,5 @@ module.exports = {
   updateProductById,
   updateCart,
   deleteProductById,
+  printToWindowByCategory,
 };
