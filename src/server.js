@@ -35,9 +35,9 @@ app.use(express.static(publicPath));
 //   res.render("livingroom.hbs");
 // });
 
-app.get(`${productsRoute}/:category`, (req, res) => {
-  const category = req.params.category;
-  printToWindowByCategory(req, res, category);
+app.get(`${productsRoute}/kitchen`, (req, res) => {
+  printToWindowByCategory(req, res, "kitchen");
+  
 });
 
 app.get(productsRoute, (req, res) => {

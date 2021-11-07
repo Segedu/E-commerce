@@ -12,12 +12,14 @@ function printToWindowByCategory(req, res, category) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
     const currentDB = db.db(dbName);
+    console.log(category);
+    // const category = req.params.category;
     currentDB
       .collection(prodColl)
       .find({ category: category })
       .toArray((err, products) => {
         if (err) throw err;
-        resultArray.push(products);
+        resultArray=products;
         res.send(resultArray);
         console.log(resultArray);
       });
@@ -101,6 +103,7 @@ function insertNewCart(req, res, cartObj) {
     });
   });
 }
+
 function insertNewContact(req, res, contactObj) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
