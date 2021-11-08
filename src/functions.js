@@ -104,10 +104,6 @@ function insertNewCart(req, res, cartObj) {
 function insertNewContact(req, res, contactObj) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
-    // const name = req.body.name,
-    // email = req.body.email,
-    // message = req.body.message,
-    // contactObj = { name, email, message };
     const currentDB = db.db(dbName);
     currentDB.collection(contColl).insertOne(contactObj, (err, contact) => {
       if (err) throw err;
@@ -162,7 +158,6 @@ function updateCart() {}
 //     });
 //   });
 // }
-
 
 module.exports = {
   // updateMany,

@@ -6,9 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css" />
+    <!-- <link rel="stylesheet" href="./css/contactStyle.css" /> -->
   </head>
   <body>
-    <h1></h1>
+    <h1>products functions</h1>
+    <form id="productsFuncForm">
+      <input type="text" placeholder="new product name" id="name" /><br />
+      <input type="text" placeholder="price" id="price" /><br />
+      <input type="text" placeholder="description" id="description" /><br />
+      <input type="text" placeholder="category" id="category" /><br>
+      <input type="text" placeholder="image link 1" id="imageOne" /><br />
+      <input type="text" placeholder="image link 2" id="imageTwo" /><br>
+      <input type="submit" value="create new product" />
+    </form>
+      <!-- <button id="newProductName">create new product</button> -->
+      <!-- <input type="submit" value=""> -->
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/client.js"></script>
+    <script>
+      document
+        .getElementById("productsFuncForm")
+        .addEventListener("submit", insertNewProduct);
+    </script>
   </body>
 </html>

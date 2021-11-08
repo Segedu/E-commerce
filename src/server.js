@@ -54,7 +54,16 @@ app.get(`${cartsRoute}/:id`, (req, res) => {
 
 app.post(productsRoute, (req, res) => {
   const name = req.body.name,
-    productObj = { name: name };
+    price = req.body.price,
+    description = req.body.description,
+    category = req.body.category,
+    productObj = {
+      name: name,
+      price: price,
+      description: description,
+      category: category,
+      
+    };
   insertNewProduct(req, res, productObj);
 });
 

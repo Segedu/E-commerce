@@ -1,4 +1,3 @@
-// const { default: axios } = require("axios");
 
 function axiosByCategory(route) {
   const divName = `${route}Cont`;
@@ -69,14 +68,42 @@ function showMobileNav() {
   }
 }
 
-document.getElementById("form").addEventListener("submit", insertNewContact);
+function insertNewProduct(e) {
+  e.preventDefault();
+  const
+   name = document.getElementById("name").value,
+    price = document.getElementById("price").value,
+    description = document.getElementById("description").value,
+    category = document.getElementById("category").value,
+    image1 = document.getElementById("imageOne").value,
+    image2 = document.getElementById("imageTwo").value;
+    let newObj={
+      name:name,
+      price:price,
+      description:description,
+      category:category,
+      images=[image1,image2]
+    }
+    axios.post("/products",{
+      newObj
+    }).then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log("you are in the create product catch");
+    });
+}
 
 function insertNewContact(e) {
   e.preventDefault();
   const name = document.getElementById("Full Name").value,
     email = document.getElementById("Email").value,
-    message = document.getElementById("message").value,
-    contactObj = { name, email, message };
+    message = document.getElementById("message").value;
+  let contactObj = {
+    name: name,
+    email: email,
+    message: message,
+  };
   console.log(contactObj);
   axios
     .post("/contacts", {
@@ -87,5 +114,17 @@ function insertNewContact(e) {
     })
     .catch(function (error) {
       console.log("you are in the create message catch");
+    });
+}
+
+function getAllMessages(e) {
+  e.preventDefault();
+  axios
+    .get("/contacts")
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log("you are in get messages catch");
     });
 }
