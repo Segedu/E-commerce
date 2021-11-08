@@ -12,16 +12,13 @@ function printToWindowByCategory(req, res, category) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
     const currentDB = db.db(dbName);
-    console.log(category);
-    // const category = req.params.category;
     currentDB
       .collection(prodColl)
       .find({ category: category })
       .toArray((err, products) => {
         if (err) throw err;
-        resultArray=products;
+        resultArray = products;
         res.send(resultArray);
-        console.log(resultArray);
       });
   });
 }
@@ -107,6 +104,10 @@ function insertNewCart(req, res, cartObj) {
 function insertNewContact(req, res, contactObj) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
+    // const name = req.body.name,
+    // email = req.body.email,
+    // message = req.body.message,
+    // contactObj = { name, email, message };
     const currentDB = db.db(dbName);
     currentDB.collection(contColl).insertOne(contactObj, (err, contact) => {
       if (err) throw err;
@@ -147,7 +148,24 @@ function updateProductById(req, res, id, updateProd) {
 
 function updateCart() {}
 
+// function updateMany(req, res) {
+//   MongoClient.connect(url, (err, db) => {
+//     if (err) throw err;
+//     const currentDB = db.db(dbName);
+//     let filter = { category: "living room" };
+//     let newValue = { $set: { category: "livingRoom" } };
+//     currentDB.collection(prodColl).updateMany(filter, newValue, (err, docs) => {
+//       if (err) throw err;
+//       res.send(docs);
+//       console.log("updated!");
+//       db.close();
+//     });
+//   });
+// }
+
+
 module.exports = {
+  // updateMany,
   getAllProducts,
   getAllContacts,
   getCartById,

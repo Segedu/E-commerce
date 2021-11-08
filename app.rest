@@ -1,10 +1,11 @@
-GET http://localhost:8080/products/living room
+GET http://localhost:8080/products
 
 ###
 DELETE http://localhost:8080/products/618539287c1db9f18b9e9260
 
 ###
 
+###
 PATCH http://localhost:8080/products/61830f41279d2f48c9164978
 Content-Type: application/json
 

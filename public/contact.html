@@ -4,17 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="contactStyle.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./css/contactStyle.css" />
+    <link rel="stylesheet" href="./css/style.css" />
     <title>Document</title>
   </head>
   <body>
-    <form id="form" action="">
+    <form id="form" >
       <section id="formSect">
         <h1>Contact Me</h1>
-        <input type="text" placeholder="Full Name" />
-        <input type="text" placeholder="Email" />
+        <input type="text" placeholder="Full Name" id="Full Name" />
+        <input type="text" placeholder="Email" id="Email" />
         <input type="text" placeholder="Message" id="message" />
+        <!-- <button></button> -->
         <input type="submit" value="SEND" id="submit" />
       </section>
       <section id="myDetails">
@@ -23,6 +24,7 @@
         ><a href="#">segedu.abe@gmail.com</a>
       </section>
     </form>
-    <script src="client.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/client.js"></script>
   </body>
 </html>

@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>kitchen page</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="categories.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/categories.css" />
     <script
       src="https://kit.fontawesome.com/3f63fe4456.js"
       crossorigin="anonymous"
@@ -45,7 +45,7 @@
           alt="kitchen"
         />
       </div>
-      <div id="kitchCont"></div>
+      <div id="kitchenCont"></div>
       <a href="#"><i class="fas fa-chevron-up"></i></a>
     </main>
     <footer>
@@ -71,6 +71,9 @@
       <span>© 2021 Segedu Abe. All rights reserved</span>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="client.js"></script>
+    <script src="./js/client.js"></script>
+    <script>
+      axiosByCategory("kitchen");
+    </script>
   </body>
 </html>
