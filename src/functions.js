@@ -140,53 +140,14 @@ function updateProductById(req, res) {
         function (err, resUpdated) {
           if (err) throw err;
           res.send(resUpdated);
-          // if (
-          //   dataToUpdate.title == undefined ||
-          //   dataToUpdate.title.length == 0
-          // ) {
-          //   return res.sendStatus(400);
-          // }
-          // if (resUpdated.value) {
-          //   res.sendStatus(200);
-          // } else {
-          //   res.sendStatus(404);
-          // }
+
           db.close();
         }
       );
   });
 }
-// MongoClient.connect(url, (err, db) => {
-// if (err) throw err;
-//  let idValue= { _id: ObjectId(id) },
-// let newValue={ $set: {updateProd} },
-// currentDB
-// .findOneAndUpdate(
-//         { $set: newValue },
-//         (err, product) => {
-//           if (err) throw err;
-//           res.send(product);
-//           console.log("updated!");
-//         }
-//       );
-//   });
 
 function addToCart(id) {}
-
-// function updateMany(req, res) {
-//   MongoClient.connect(url, (err, db) => {
-//     if (err) throw err;
-//     const currentDB = db.db(dbName);
-//     let filter = { category: "living room" };
-//     let newValue = { $set: { category: "livingRoom" } };
-//     currentDB.collection(prodColl).updateMany(filter, newValue, (err, docs) => {
-//       if (err) throw err;
-//       res.send(docs);
-//       console.log("updated!");
-//       db.close();
-//     });
-//   });
-// }
 
 module.exports = {
   getAllProducts,
