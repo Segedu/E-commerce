@@ -140,14 +140,22 @@ function updateProductById(req, res) {
         function (err, resUpdated) {
           if (err) throw err;
           res.send(resUpdated);
-
           db.close();
         }
       );
   });
 }
 
-function addToCart(id) {}
+function addToCart(req, res, id) {
+  MongoClient.connect(url, (err, db) => {
+    if (err) throw err;
+    const currentDB = db.db(dbName);
+    currentDB.collection(prodColl).insertOne(productObj, (err, product) => {
+      if (err) throw err;
+      res.send(product);
+    });
+  });
+}
 
 module.exports = {
   getAllProducts,
