@@ -1,5 +1,3 @@
-// const { default: axios } = require("axios");
-
 function axiosByCategory(route) {
   const divName = `${route}Cont`,
     productsRoute = "/products";
@@ -70,7 +68,6 @@ function showMobileNav() {
 
 function updateProductById(e) {
   e.preventDefault();
-  // const id = document.getElementById("ID").value;
   const name = document.getElementById("name").value,
     price = document.getElementById("price").value,
     description = document.getElementById("description").value,
@@ -94,6 +91,18 @@ function updateProductById(e) {
     });
 }
 
+function deleteProductById(e) {
+  e.preventDefault();
+  let id = document.getElementById("deleteById").value;
+  axios
+    .delete(`/products/${id}`)
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log("you are in the delete by ID catch");
+    });
+}
 function insertNewProduct(e) {
   e.preventDefault();
   const name = document.getElementById("name").value,

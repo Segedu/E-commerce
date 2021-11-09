@@ -45,7 +45,7 @@
         />
       </div>
       <form id="updateProductForm">
-        <input type="text" placeholder="product ID" id="ID"/>
+        <input type="text" placeholder="product ID" id="ID" />
         <input type="text" placeholder="product name" id="name" />
         <input type="text" placeholder="price" id="price" />
         <input type="text" placeholder="description" id="description" />
@@ -53,6 +53,10 @@
         <input type="text" placeholder="image link 1" id="imageOne" />
         <input type="text" placeholder="image link 2" id="imageTwo" />
         <input type="submit" value="update product" /><br /><br />
+      </form>
+      <form id="deleteProductForm">
+        <input type="text" placeholder="product ID" id="deleteById" />
+        <input type="submit" value="delete" product" /><br /><br />
       </form>
       <div id="livingRoomCont"></div>
       <a href="#"><i class="fas fa-chevron-up"></i></a>
@@ -85,6 +89,9 @@
       document
         .getElementById("updateProductForm")
         .addEventListener("submit", updateProductById);
+      document
+        .getElementById("deleteProductForm")
+        .addEventListener("submit", deleteProductById);
       axiosByCategory("livingRoom");
     </script>
   </body>
