@@ -7,14 +7,13 @@ const express = require("express"),
   contactsRoute = "/contacts",
   PORT = 8080,
   {
-    // updateMany,
     getAllProducts,
     getAllContacts,
     getCartById,
     insertNewProduct,
     insertNewContact,
     insertNewCart,
-    updateCart,
+    addToCart,
     updateProductById,
     deleteProductById,
     printToWindowByCategory,
@@ -57,12 +56,14 @@ app.post(productsRoute, (req, res) => {
     price = req.body.price,
     description = req.body.description,
     category = req.body.category,
+    image1 = req.body.image1,
+    image2 = req.body.image2,
     productObj = {
       name: name,
       price: price,
       description: description,
       category: category,
-      
+      images: [image1, image2],
     };
   insertNewProduct(req, res, productObj);
 });
@@ -81,15 +82,15 @@ app.post(cartsRoute, (req, res) => {
   insertNewCart(req, res, cartObj);
 });
 
-app.patch(cartsRoute, (req, res) => {
-  updateCart(req, res);
+app.patch(`${cartsRoute}/api/addToCart`, (req, res) => {
+  addToCart(req, res);
+});
+app.patch(`${cartsRoute}/api/deleteFromCart`, (req, res) => {
+  deleteFromCart(req, res);
 });
 
 app.patch(`${productsRoute}/:id`, (req, res) => {
-  const id = req.params.id,
-    name = req.body.name,
-    updateProd = { name: name };
-  updateProductById(req, res, id, updateProd);
+  updateProductById(req, res);
 });
 
 app.delete(`${productsRoute}/:id`, (req, res) => {

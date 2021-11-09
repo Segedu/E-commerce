@@ -1,13 +1,13 @@
+// const { default: axios } = require("axios");
 
 function axiosByCategory(route) {
-  const divName = `${route}Cont`;
-  const productsRoute = "/products";
+  const divName = `${route}Cont`,
+    productsRoute = "/products";
   axios
     .get(`${productsRoute}/${route}`)
     .then(function (response) {
       if (response.status == 200) {
-        let serverData;
-        serverData = response.data;
+        let serverData = response.data;
         let bedRCont = document.getElementById(divName);
         let bathCont = document.getElementById(divName);
         let livingCont = document.getElementById(divName);
@@ -42,9 +42,9 @@ function printToWindowByCategory(divElement, resultArray) {
 }
 
 function addToCart(id) {
-  for (let i = 0; i < products.length; i++) {
-    if (id === products[i].id) {
-      itemsArray.push(products[i]);
+  for (let i = 0; i < resultArray.length; i++) {
+    if (id === resultArray[i].id) {
+      itemsArray.push(resultArray[i]);
       itemCounter.innerHTML = `<p id="counter">${itemsArray.length}</p>`;
     }
   }
@@ -68,26 +68,54 @@ function showMobileNav() {
   }
 }
 
-function insertNewProduct(e) {
+function updateProductById(e) {
   e.preventDefault();
-  const
-   name = document.getElementById("name").value,
+  // const id = document.getElementById("ID").value;
+  const name = document.getElementById("name").value,
     price = document.getElementById("price").value,
     description = document.getElementById("description").value,
     category = document.getElementById("category").value,
     image1 = document.getElementById("imageOne").value,
     image2 = document.getElementById("imageTwo").value;
-    let newObj={
-      name:name,
-      price:price,
-      description:description,
-      category:category,
-      images=[image1,image2]
-    }
-    axios.post("/products",{
-      newObj
-    }).then(function (response) {
+
+  axios
+    .patch(`/products/${id}`, {
+      name: name,
+      price: price,
+      description: description,
+      category: category,
+      images: [image1, image2],
+    })
+    .then(function (response) {
       console.log(response);
+    })
+    .catch(function (error) {
+      console.log("you are in update product by Id catch");
+    });
+}
+
+function insertNewProduct(e) {
+  e.preventDefault();
+  const name = document.getElementById("name").value,
+    price = document.getElementById("price").value,
+    description = document.getElementById("description").value,
+    category = document.getElementById("category").value,
+    image1 = document.getElementById("imageOne").value,
+    image2 = document.getElementById("imageTwo").value;
+  let newObj = {
+    name: name,
+    price: price,
+    description: description,
+    category: category,
+    images: [image1, image2],
+  };
+  axios
+    .post("/products", {
+      newObj,
+    })
+    .then(function (response) {
+      console.log(response);
+      alert(`The new product ${name} added to the database!`);
     })
     .catch(function (error) {
       console.log("you are in the create product catch");

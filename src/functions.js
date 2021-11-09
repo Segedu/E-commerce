@@ -8,6 +8,7 @@ const mongoDB = require("mongodb"),
   dbName = "E-commerce";
 
 let resultArray = [];
+
 function printToWindowByCategory(req, res, category) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
@@ -125,24 +126,52 @@ function deleteProductById(req, res, id) {
   });
 }
 
-function updateProductById(req, res, id, updateProd) {
-  MongoClient.connect(url, (err, db) => {
+function updateProductById(req, res) {
+  MongoClient.connect(url, function (err, db) {
     if (err) throw err;
+    const dataToUpdate = req.body;
+    const id = req.params.id;
     const currentDB = db.db(dbName);
     currentDB
       .collection(prodColl)
       .findOneAndUpdate(
         { _id: ObjectId(id) },
-        { $set: updateProd },
-        (err, product) => {
+        { $set: dataToUpdate },
+        function (err, resUpdated) {
           if (err) throw err;
-          res.send(product);
+          res.send(resUpdated);
+          // if (
+          //   dataToUpdate.title == undefined ||
+          //   dataToUpdate.title.length == 0
+          // ) {
+          //   return res.sendStatus(400);
+          // }
+          // if (resUpdated.value) {
+          //   res.sendStatus(200);
+          // } else {
+          //   res.sendStatus(404);
+          // }
+          db.close();
         }
       );
   });
 }
+// MongoClient.connect(url, (err, db) => {
+// if (err) throw err;
+//  let idValue= { _id: ObjectId(id) },
+// let newValue={ $set: {updateProd} },
+// currentDB
+// .findOneAndUpdate(
+//         { $set: newValue },
+//         (err, product) => {
+//           if (err) throw err;
+//           res.send(product);
+//           console.log("updated!");
+//         }
+//       );
+//   });
 
-function updateCart() {}
+function addToCart(id) {}
 
 // function updateMany(req, res) {
 //   MongoClient.connect(url, (err, db) => {
@@ -160,7 +189,6 @@ function updateCart() {}
 // }
 
 module.exports = {
-  // updateMany,
   getAllProducts,
   getAllContacts,
   getCartById,
@@ -168,7 +196,7 @@ module.exports = {
   insertNewCart,
   insertNewContact,
   updateProductById,
-  updateCart,
+  addToCart,
   deleteProductById,
   printToWindowByCategory,
 };

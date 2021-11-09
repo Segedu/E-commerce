@@ -44,6 +44,16 @@
           alt="living room"
         />
       </div>
+      <form id="updateProductForm">
+        <input type="text" placeholder="product ID" id="ID"/>
+        <input type="text" placeholder="product name" id="name" />
+        <input type="text" placeholder="price" id="price" />
+        <input type="text" placeholder="description" id="description" />
+        <input type="text" placeholder="category" id="category" />
+        <input type="text" placeholder="image link 1" id="imageOne" />
+        <input type="text" placeholder="image link 2" id="imageTwo" />
+        <input type="submit" value="update product" /><br /><br />
+      </form>
       <div id="livingRoomCont"></div>
       <a href="#"><i class="fas fa-chevron-up"></i></a>
     </main>
@@ -72,6 +82,9 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/client.js"></script>
     <script>
+      document
+        .getElementById("updateProductForm")
+        .addEventListener("submit", updateProductById);
       axiosByCategory("livingRoom");
     </script>
   </body>
