@@ -1,3 +1,5 @@
+// const { ObjectID } = require("mongodb");
+
 function axiosByCategory(route) {
   const divName = `${route}Cont`,
     productsRoute = "/products";
@@ -29,9 +31,9 @@ function printToWindowByCategory(divElement, resultArray) {
       <p>${resultArray[i].name}</p>
       <p>${resultArray[i].description}</p>
       <h1>${resultArray[i].price + " ₪"}</h1>
-      <button onclick="addToCart(${resultArray[i].id})" id="addBtn">
+      <button onclick="axiosAddToCart(${resultArray[i]._id})" id="addBtn">
       add to cart</button>
-      <button onclick="addTolikedItems(${
+      <button onclick="addToLikedItems(${
         resultArray[i].id
       })" id="likeBtn"><img src="https://img.icons8.com/ios-glyphs/30/000000/like--v1.png"/></button>
       </article>
@@ -39,16 +41,30 @@ function printToWindowByCategory(divElement, resultArray) {
   }
 }
 
-function addToCart(id) {
-  for (let i = 0; i < resultArray.length; i++) {
-    if (id === resultArray[i].id) {
-      itemsArray.push(resultArray[i]);
-      itemCounter.innerHTML = `<p id="counter">${itemsArray.length}</p>`;
-    }
-  }
+// for (let i = 0; i < resultArray.length; i++) {
+//   if (id === resultArray[i].id) {
+//     itemsArray.push(resultArray[i]);
+//     cartDiv.innerHTML += `<section>
+//     ${itemsArray[i].name}</section>`;
+//     itemCounter.innerHTML = `<p id="counter">${itemsArray.length}</p>`;
+//   }
+// }
+function axiosAddToCart(productId) {
+  axios
+    .patch("/carts/add/6183162cd7907e590851e05a", {
+      _id: productId,
+    })
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log("you are in add to cart catch");
+    });
 }
 
-function addTolikedItems(id) {
+itemsArray = [];
+
+function addToLikedItems(id) {
   for (let i = 0; i < products.length; i++) {
     if (id === products[i].id) {
       likedItemsArray.push(products[i]);
@@ -58,12 +74,24 @@ function addTolikedItems(id) {
 }
 
 function showMobileNav() {
-  var navLinks = document.getElementById("navLinks");
+  let navLinks = document.getElementById("navLinks");
   if (navLinks.className === "navBarCont") {
     navLinks.className += " responsive";
   } else {
     navLinks.className = "navBarCont";
   }
+}
+
+function showAdminOptions() {
+  let adminOptionsCont = document.getElementById("adminOptionsCont");
+  adminOptionsCont.innerHTML += `
+    <a href="./addProducts.html">create product</a>
+    <a href="./updateProducts.html">update product</a>
+    <a href="./allMessages.html">client messages</a>`;
+}
+
+function displayNone() {
+  adminOptionsCont.style.display = "none";
 }
 
 function updateProductById(e) {
@@ -136,18 +164,16 @@ function insertNewContact(e) {
   const name = document.getElementById("Full Name").value,
     email = document.getElementById("Email").value,
     message = document.getElementById("message").value;
-  let contactObj = {
-    name: name,
-    email: email,
-    message: message,
-  };
-  console.log(contactObj);
+
   axios
     .post("/contacts", {
-      contactObj,
+      name: name,
+      email: email,
+      message: message,
     })
     .then(function (response) {
       console.log(response);
+      alert("Your message was sent successfully");
     })
     .catch(function (error) {
       console.log("you are in the create message catch");

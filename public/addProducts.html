@@ -6,19 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css" />
-    <!-- <link rel="stylesheet" href="./css/contactStyle.css" /> -->
+    <link rel="stylesheet" href="./css/contactStyle.css" />
   </head>
   <body>
-    <h1>Create new product</h1>
-    <form id="productsFuncForm">
-      <input type="text" placeholder="new product name" id="name" /><br />
-      <input type="text" placeholder="price" id="price" /><br />
-      <input type="text" placeholder="description" id="description" /><br />
-      <input type="text" placeholder="category" id="category" /><br />
-      <input type="text" placeholder="image link 1" id="imageOne" /><br />
-      <input type="text" placeholder="image link 2" id="imageTwo" /><br />
-      <input type="submit" value="create new product" />
-    </form>
+    <header></header>
+    <main>
+      <form id="productsFuncForm">
+        <section id="prodFormSect">
+          <h1>Add product</h1>
+          <input type="text" placeholder="new product name" id="name" /><br />
+          <input type="text" placeholder="price" id="price" /><br />
+          <input type="text" placeholder="description" id="description" /><br />
+          <input type="text" placeholder="category" id="category" /><br />
+          <input type="text" placeholder="image link 1" id="imageOne" /><br />
+          <input type="text" placeholder="image link 2" id="imageTwo" /><br />
+          <input type="submit" value="SEND" id="submit" />
+        </section>
+      </form>
+    </main>
+    <footer></footer>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/client.js"></script>
     <script>

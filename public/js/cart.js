@@ -48,7 +48,7 @@ for (let i = 0; i < cartItems.length; i++) {
   <h1 class="priceCont">${cartItems[i].price}₪</h1>
   <button onclick="removeFromCart(${cartItems[i].id})" id="removeBtn"><i class="fas fa-trash-alt"></i></button></article></td>  
   </tr> `;
-  quantityArr.push(products[i]);
+  quantityArr.push(cartItems[i]);
   total.innerHTML = `<h3> Total: ${calculateSum(cartItems)}₪
   </h3><article id="totCont"><button id="checkoutBtn">Checkout</button></article>`;
 }

@@ -69,11 +69,7 @@ app.post(productsRoute, (req, res) => {
 });
 
 app.post(contactsRoute, (req, res) => {
-  const name = req.body.name,
-    email = req.body.email,
-    message = req.body.message,
-    contactObj = { name, email, message };
-  insertNewContact(req, res, contactObj);
+  insertNewContact(req, res);
 });
 
 app.post(cartsRoute, (req, res) => {
@@ -82,9 +78,10 @@ app.post(cartsRoute, (req, res) => {
   insertNewCart(req, res, cartObj);
 });
 
-app.patch(`${cartsRoute}/api/addToCart`, (req, res) => {
+app.patch(`${cartsRoute}/add/:id`, (req, res) => {
   addToCart(req, res);
 });
+
 app.patch(`${cartsRoute}/api/deleteFromCart`, (req, res) => {
   deleteFromCart(req, res);
 });

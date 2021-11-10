@@ -3,7 +3,6 @@ GET http://localhost:8080/products
 ###
 DELETE http://localhost:8080/products/6183131b2ff5fda3fb58d838
 
-###
 
 ###
 PATCH http://localhost:8080/products/
@@ -42,12 +41,12 @@ Content-Type: application/json
 
 ###
 
-PATCH  http://localhost:8080/carts
+PATCH  http://localhost:8080/carts/6183162cd7907e590851e05a
 Content-Type: application/json
 
 {
-"name":""
-
+"name":"somethinggg",
+"products":"lklkl"
 }
 
 ###

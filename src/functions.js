@@ -1,3 +1,5 @@
+const { ObjectID } = require("bson");
+
 const mongoDB = require("mongodb"),
   MongoClient = mongoDB.MongoClient,
   ObjectId = mongoDB.ObjectId,
@@ -8,6 +10,7 @@ const mongoDB = require("mongodb"),
   dbName = "E-commerce";
 
 let resultArray = [];
+// let theProd;
 
 function printToWindowByCategory(req, res, category) {
   MongoClient.connect(url, (err, db) => {
@@ -19,6 +22,8 @@ function printToWindowByCategory(req, res, category) {
       .toArray((err, products) => {
         if (err) throw err;
         resultArray = products;
+        // currentDB.prodColl.find({ _id: { $in: [ObjectID(id)] } });
+        // theProd = products.values;
         res.send(resultArray);
       });
   });
@@ -102,9 +107,10 @@ function insertNewCart(req, res, cartObj) {
   });
 }
 
-function insertNewContact(req, res, contactObj) {
+function insertNewContact(req, res) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
+    const contactObj = req.body;
     const currentDB = db.db(dbName);
     currentDB.collection(contColl).insertOne(contactObj, (err, contact) => {
       if (err) throw err;
@@ -146,14 +152,22 @@ function updateProductById(req, res) {
   });
 }
 
-function addToCart(req, res, id) {
+function addToCart(req, res) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
     const currentDB = db.db(dbName);
-    currentDB.collection(prodColl).insertOne(productObj, (err, product) => {
-      if (err) throw err;
-      res.send(product);
-    });
+    const id = req.params.id;
+    const addThisObj = req.body._id;
+    currentDB
+      .collection(prodColl)
+      .findOneAndUpdate(
+        { _id: ObjectID(id) },
+        { $push: addThisObj },
+        (err, product) => {
+          if (err) throw err;
+          res.send(product);
+        }
+      );
   });
 }
 
