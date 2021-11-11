@@ -7,6 +7,7 @@ const express = require("express"),
   contactsRoute = "/contacts",
   PORT = 8080,
   {
+    printToWindowByCategory,
     getAllProducts,
     getAllContacts,
     getCartById,
@@ -14,9 +15,9 @@ const express = require("express"),
     insertNewContact,
     insertNewCart,
     addToCart,
+    deleteFromCart,
     updateProductById,
     deleteProductById,
-    printToWindowByCategory,
   } = require("./functions");
 
 app.use(express.json());
@@ -82,7 +83,7 @@ app.patch(`${cartsRoute}/add/:id`, (req, res) => {
   addToCart(req, res);
 });
 
-app.patch(`${cartsRoute}/api/deleteFromCart`, (req, res) => {
+app.patch(`${cartsRoute}/delete/:id`, (req, res) => {
   deleteFromCart(req, res);
 });
 

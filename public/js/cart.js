@@ -1,65 +1,45 @@
-var tableCartDiv = document.getElementById("tableCartDiv");
-var dataTable = document.getElementById("dataTable");
-var total = document.getElementById("totalSum");
-var cartItems = [
-  {
-    name: "bed",
-    id: 1,
-    price: 899,
-    description: "Lorem, ipsum dolor. Maiores.",
-    category: "bedroom",
-    images: [
-      "https://images.pexels.com/photos/916339/pexels-photo-916339.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "https://images.pexels.com/photos/916339/pexels-photo-916339.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    ],
-  },
-  {
-    name: "bed",
-    id: 2,
-    price: 799,
-    description: "Lorem, ipsum dolor. Maiores.",
-    category: "bedroom",
-    images: [
-      "https://images.pexels.com/photos/3201761/pexels-photo-3201761.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "https://images.pexels.com/photos/3201761/pexels-photo-3201761.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    ],
-  },
-  {
-    name: "bed",
-    id: 3,
-    price: 999,
-    description: "Lorem, ipsum dolor. Maiores.",
-    category: "bedroom",
-    images: [
-      "https://images.pexels.com/photos/4993094/pexels-photo-4993094.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "https://images.pexels.com/photos/4993094/pexels-photo-4993094.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    ],
-  },
-];
-var quantityArr = [];
+let tableCartDiv = document.getElementById("tableCartDiv"),
+  dataTable = document.getElementById("dataTable"),
+  total = document.getElementById("totalSum"),
+  priceCont = document.getElementsByClassName("priceCont"),
+  quantity = document.getElementsByClassName("quantity"),
+  quantityArr = [],
+  cartArray;
 
-for (let i = 0; i < cartItems.length; i++) {
-  dataTable.innerHTML += `<tr id="${cartItems[i].id}">
-  <td>
-  <article id="tabArticle"><img src="${cartItems[i].images[0]}"/>
-  <p id="pName">${cartItems[i].name}</p>
-  <p>${cartItems[i].price}₪</p>
-  <input oninput="changeQuantity()" class="quantity" type="number" value="1">
-  <h1 class="priceCont">${cartItems[i].price}₪</h1>
-  <button onclick="removeFromCart(${cartItems[i].id})" id="removeBtn"><i class="fas fa-trash-alt"></i></button></article></td>  
-  </tr> `;
-  quantityArr.push(cartItems[i]);
-  total.innerHTML = `<h3> Total: ${calculateSum(cartItems)}₪
-  </h3><article id="totCont"><button id="checkoutBtn">Checkout</button></article>`;
+function getCartById() {
+  axios
+    .get("/carts/6183162cd7907e590851e05a")
+    .then(function (response) {
+      cartArray = response.data.products;
+      printUpdatedCart(cartArray);
+      console.log("cart array:", cartArray);
+    })
+    .catch(function (error) {
+      console.log("you are in get cart by id catch");
+    });
 }
 
-var quantity = document.getElementsByClassName("quantity");
-var priceCont = document.getElementsByClassName("priceCont");
+function printUpdatedCart(cartArray) {
+  for (let i = 0; i < cartArray.length; i++) {
+    dataTable.innerHTML += `<tr id="${cartArray[i]._id}">
+    <td>
+  <article id="tabArticle"><img src="${cartArray[i].images[0]}"/>
+  <p id="pName">${cartArray[i].name}</p>
+  <p>${cartArray[i].price}₪</p>
+  <input oninput="changeQuantity()" class="quantity" type="number" value="1">
+  <h1 class="priceCont">${cartArray[i].price}₪</h1>
+  <button onclick="axiosDeleteProdFromCart('${cartArray[i]._id}')" id="removeBtn"><i class="fas fa-trash-alt"></i></button></article></td>  
+  </tr> `;
+    quantityArr.push(cartArray[i]);
+    total.innerHTML = `<h3> Total: ${calculateSum(cartArray)}₪
+  </h3><article id="totCont"><button id="checkoutBtn">Checkout</button></article>`;
+  }
+}
 
 function changeQuantity() {
-  for (let i = 0; i < cartItems.length; i++) {
+  for (let i = 0; i < cartArray.length; i++) {
     if (quantity[i].value >= 1 && !undefined) {
-      var price = cartItems[i].price;
+      var price = cartArray[i].price;
       var totalPerItem = price * quantity[i].value;
       quantityArr[i].price = totalPerItem;
       priceCont[i].innerHTML = `${totalPerItem}₪`;
@@ -68,15 +48,31 @@ function changeQuantity() {
     }
   }
 }
-console.log("quantity array:", quantityArr);
-console.log("cart items array:", cartItems);
 
-function removeFromCart(id) {
-  for (let i = 0; i < cartItems.length; i++) {
-    if (cartItems[i].id === id) {
-      cartItems.splice(i, 1);
-      document.getElementById(id).innerHTML = "";
-      const sum = calculateSum(cartItems);
+console.log("quantity array:", quantityArr);
+
+function axiosDeleteProdFromCart(productId) {
+  // e.preventDefault();
+  // let id = document.getElementById("deleteById").value;
+  axios
+    .patch(`/carts/delete/6183162cd7907e590851e05a`, {
+      _id: productId,
+    })
+    .then(function (response) {
+      console.log(response.data);
+      deleteFromCart();
+    })
+    .catch(function (error) {
+      console.log("you are in the delete by ID catch");
+    });
+}
+
+function deleteFromCart(_id) {
+  for (let i = 0; i < cartArray.length; i++) {
+    if (cartArray[i]._id === _id) {
+      cartArray.splice(i, 1);
+      document.getElementById(_id).innerHTML = "";
+      const sum = calculateSum(cartArray);
       total.innerHTML = `<p>Total: ${sum + "₪"}</p>`;
     }
   }

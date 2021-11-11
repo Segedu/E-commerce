@@ -41,7 +41,7 @@ Content-Type: application/json
 
 ###
 
-PATCH  http://localhost:8080/carts/6183162cd7907e590851e05a
+PATCH  http://localhost:8080/carts/add/6183162cd7907e590851e05a
 Content-Type: application/json
 
 {

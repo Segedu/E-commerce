@@ -1,5 +1,3 @@
-// const { ObjectID } = require("mongodb");
-
 function axiosByCategory(route) {
   const divName = `${route}Cont`,
     productsRoute = "/products";
@@ -31,7 +29,7 @@ function printToWindowByCategory(divElement, resultArray) {
       <p>${resultArray[i].name}</p>
       <p>${resultArray[i].description}</p>
       <h1>${resultArray[i].price + " ₪"}</h1>
-      <button onclick="axiosAddToCart(${resultArray[i]._id})" id="addBtn">
+      <button onclick="axiosAddToCart('${resultArray[i]._id}')" id="addBtn">
       add to cart</button>
       <button onclick="addToLikedItems(${
         resultArray[i].id

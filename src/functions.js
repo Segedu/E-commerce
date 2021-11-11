@@ -1,5 +1,3 @@
-const { ObjectID } = require("bson");
-
 const mongoDB = require("mongodb"),
   MongoClient = mongoDB.MongoClient,
   ObjectId = mongoDB.ObjectId,
@@ -10,7 +8,7 @@ const mongoDB = require("mongodb"),
   dbName = "E-commerce";
 
 let resultArray = [];
-// let theProd;
+let cartArray = [];
 
 function printToWindowByCategory(req, res, category) {
   MongoClient.connect(url, (err, db) => {
@@ -22,9 +20,22 @@ function printToWindowByCategory(req, res, category) {
       .toArray((err, products) => {
         if (err) throw err;
         resultArray = products;
-        // currentDB.prodColl.find({ _id: { $in: [ObjectID(id)] } });
-        // theProd = products.values;
         res.send(resultArray);
+      });
+  });
+}
+
+function getCartById(req, res) {
+  MongoClient.connect(url, (err, db) => {
+    if (err) throw err;
+    const cartId = req.params.id;
+    const currentDB = db.db(dbName);
+    currentDB
+      .collection(cartColl)
+      .findOne({ _id: ObjectId(cartId) }, (err, cart) => {
+        if (err) throw err;
+        cartArray = cart;
+        res.send(cart);
       });
   });
 }
@@ -67,24 +78,6 @@ function getAllContacts(req, res) {
   });
 }
 
-function getCartById(req, res) {
-  MongoClient.connect(url, (err, db) => {
-    if (err) throw err;
-    const currentDB = db.db(dbName);
-    const id = req.params.id;
-    currentDB
-      .collection(cartColl)
-      .findOne({ _id: ObjectId(id) }, (err, cart) => {
-        if (err) {
-          console.log("error at getting this cart");
-          throw err;
-        }
-        res.send(cart);
-        db.close();
-      });
-  });
-}
-
 function insertNewProduct(req, res, productObj) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
@@ -119,19 +112,6 @@ function insertNewContact(req, res) {
   });
 }
 
-function deleteProductById(req, res, id) {
-  MongoClient.connect(url, (err, db) => {
-    if (err) throw err;
-    const currentDB = db.db(dbName);
-    currentDB
-      .collection(prodColl)
-      .findOneAndDelete({ _id: ObjectId(id) }, (err, product) => {
-        if (err) throw err;
-        res.send(product);
-      });
-  });
-}
-
 function updateProductById(req, res) {
   MongoClient.connect(url, function (err, db) {
     if (err) throw err;
@@ -152,26 +132,75 @@ function updateProductById(req, res) {
   });
 }
 
+function deleteProductById(req, res, id) {
+  MongoClient.connect(url, (err, db) => {
+    if (err) throw err;
+    const currentDB = db.db(dbName);
+    currentDB
+      .collection(prodColl)
+      .findOneAndDelete({ _id: ObjectId(id) }, (err, product) => {
+        if (err) throw err;
+        res.send(product);
+      });
+  });
+}
+
 function addToCart(req, res) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
     const currentDB = db.db(dbName);
-    const id = req.params.id;
-    const addThisObj = req.body._id;
+    const prodId = req.body._id;
+    const idCart = req.params.id;
     currentDB
       .collection(prodColl)
-      .findOneAndUpdate(
-        { _id: ObjectID(id) },
-        { $push: addThisObj },
-        (err, product) => {
-          if (err) throw err;
-          res.send(product);
+      .findOne({ _id: ObjectId(prodId) }, (err, prod) => {
+        if (err) {
+          throw err;
         }
-      );
+        currentDB
+          .collection(cartColl)
+          .updateOne(
+            { _id: ObjectId(idCart) },
+            { $push: { products: prod } },
+            (err, product) => {
+              if (err) throw err;
+              res.send(product);
+            }
+          );
+      });
+  });
+}
+
+function deleteFromCart(req, res) {
+  MongoClient.connect((err, db) => {
+    if (err) throw err;
+    const currentDB = db.db(dbName);
+    const productId = req.body._id;
+    const theCartId = req.params.id;
+    currentDB
+      .collection(cartColl)
+      .find({ _id: ObjectId(theCartId) }, (err, foundCart) => {
+        if (err) throw err;
+
+        const cartData = foundCart;
+      })
+      .find({ _id: ObjectId(productId) }, (err, foundProd) => {
+        if (err) throw err;
+        console.log(foundProd);
+        // foundProd.updateOne(
+        //   { _id: ObjectId(productId) },
+        //   { $pull: { cartData: foundProd } },
+        //   (err, newCart) => {
+        //     if (err) throw err;
+        //     console.log(newCart);
+        //   }
+        // );
+      });
   });
 }
 
 module.exports = {
+  printToWindowByCategory,
   getAllProducts,
   getAllContacts,
   getCartById,
@@ -179,7 +208,7 @@ module.exports = {
   insertNewCart,
   insertNewContact,
   updateProductById,
-  addToCart,
   deleteProductById,
-  printToWindowByCategory,
+  addToCart,
+  deleteFromCart,
 };
