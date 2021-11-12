@@ -26,7 +26,7 @@ function printToWindowByCategory(divElement, resultArray) {
       add to cart</button>
       <button onclick="deleteProductById('${
         resultArray[i]._id
-      }')" id="deleteBtn">delete product</button>
+      }')" id="deleteBtn">delete</button>
       <button onclick="addToLikedItems(${resultArray[i]._id})" id="likeBtn">
       <img src="https://img.icons8.com/ios-glyphs/30/000000/like--v1.png"/></button>
       </article>

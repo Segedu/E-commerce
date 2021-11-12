@@ -65,7 +65,8 @@ article {
 p {
   padding: 1%;
 }
-#addBtn {
+#addBtn,
+#deleteBtn {
   border-radius: 5px;
   background-color: var(--black);
   color: var(--white);
@@ -76,8 +77,8 @@ p {
   position: absolute;
   border-radius: 50%;
   width: 40px;
-  margin-left: 30%;
-  margin-top: -2%;
+  margin-left: 13%;
+  margin-top: 0%;
 }
 #likeBtn img {
   width: 30px;
@@ -93,6 +94,18 @@ section:hover {
   color: var(--black);
 }
 
+#updateProductForm {
+  width: 70%;
+  margin-left: 6%;
+}
+input {
+  border: none;
+  border-bottom: 2px solid #666;
+}
+input::placeholder {
+  font-size: large;
+}
+
 @media only screen and (max-width: 770px) {
   #bedRCont {
     display: flex;
@@ -100,13 +113,13 @@ section:hover {
     flex-wrap: wrap;
     width: 98%;
   }
-  #livingCont {
+  #livingRoomCont {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 98%;
   }
-  #kitchCont {
+  #kitchenCont {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -123,10 +136,11 @@ section:hover {
     height: 70%;
     padding: 2%;
   }
+
   #likeBtn {
     border-radius: 50%;
     width: 40px;
-    margin-left: 38%;
+    margin-left: 2%;
   }
   #cartIcon {
     width: 20px;
@@ -160,8 +174,8 @@ section:hover {
   }
   #likeBtn {
     position: absolute;
-    margin-left: 75%;
-    width: 30px;
+    margin-left: 0%;
+    width: 24px;
   }
   #likeBtn img {
     width: 20px;
@@ -169,6 +183,9 @@ section:hover {
   }
   #addBtn {
     position: absolute;
+  }
+  #deleteBtn{
+    margin-left:59%;
   }
   #counter {
     padding-left: 20px;
@@ -183,7 +200,7 @@ section:hover {
   }
 }
 @media only screen and (max-width: 333px) {
-  #bedRCont {
+  #bedroomCont {
     display: flex;
     flex-direction: column;
     width: 98%;
@@ -201,5 +218,8 @@ section:hover {
   }
   img {
     height: 30%;
+  }
+  #deleteBtn{
+    margin-left:36%;
   }
 }
