@@ -117,6 +117,29 @@ span {
   animation-direction: alternate;
   animation-timing-function: ease-in-out;
 }
+#messageHead {
+  display: flex;
+  margin-left: 35%;
+}
+#messageHead li {
+  margin: 3%;
+  border-bottom: 3px solid black;
+}
+#messageH1 {
+  margin-left: 38%;
+}
+table {
+  width: 50%;
+  margin-left: 30%;
+}
+#messagesTD {
+  display: flex;
+  padding: 3%;
+  margin-left: 3%;
+}
+.messPara {
+  margin: 4%;
+}
 @keyframes homePageTitle {
   0% {
     opacity: 0.4;

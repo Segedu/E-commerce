@@ -5,12 +5,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/categories.css" />
   </head>
   <body>
-    <h1>all messages page</h1>
-    <form id="getMessagesForm">
-      <input type="submit" value="get all message" id="submitBtn" />
-    </form>
+    <header>
+      <ul class="navBarCont" id="navLinks">
+          <a class="active" href="index.html">Home Page</a>
+              <a href="livingroom.html">Living room</a>
+              <a href="kitchen.html">Kitchen</a>
+              <a href="bedroom.html">Bedroom</a>
+              <a href="bath.html">Bath</a>
+              <a href="cart.html"><li id="itemCounter"></li><img id="cartIcon" src="https://cdn-icons-png.flaticon.com/128/1656/1656850.png" alt="shopping bag icon"></li></a> 
+              <a href="#"><li id="likeCounter"></li><img id="saveForLater" src="https://img.icons8.com/ios-glyphs/30/000000/like--v1.png"/></a>
+              <a href="#" class="icon" onclick="showMobileNav()"><i class="fa fa-bars"></i></a>            
+          </ul>
+  </header>
+    <main>
+      <form id="getMessagesForm">
+        <input type="submit" value="get all message" id="submitBtn" />
+      </form>
+      <h1 id="messageH1">Clients Messages</h1>
+      <ul id="messageHead">
+        <li>Name</li>
+        <li>Email</li>
+        <li>Message</th>
+      </ul>
+      <div id="messagesCont"></div>
+   
+    </main>
+    <footer>
+      <a class="navBrand" href="">About us</a>
+      <a class="navBrand" href="#">Branches</a>
+      <a class="navBrand" href="">Contact</a>
+      <a class="navBrand" href="">Work with us</a>
+      <a class="navBrand" href="https://www.facebook.com/" target="blank"
+        ><img src="https://did.li/akTfT" alt="facebook logo"
+      /></a>
+      <a
+        class="navBrand"
+        href="https://www.whatsapp.com/?lang=en"
+        target="blank"
+        ><img src="https://did.li/AvlTY" alt="whatsapp logo"
+      /></a>
+      <a class="navBrand" href="https://www.instagram.com/" target="blank"
+        ><img src="https://did.li/g4HNf" alt="instagram logo"
+      /></a>
+      <a class="navBrand" href="https://www.youtube.com/" target="blank"
+        ><img src="https://did.li/mMwlC" alt="youtube logo"
+      /></a>
+      <span>© 2021 Segedu Abe. All rights reserved</span>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/client.js"></script>
     <script>

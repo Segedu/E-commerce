@@ -18,7 +18,7 @@ const express = require("express"),
     deleteFromCart,
     updateProductById,
     deleteProductById,
-  } = require("./functions");
+  } = require("./utils");
 
 app.use(express.json());
 
@@ -53,20 +53,7 @@ app.get(`${cartsRoute}/:id`, (req, res) => {
 });
 
 app.post(productsRoute, (req, res) => {
-  const name = req.body.name,
-    price = req.body.price,
-    description = req.body.description,
-    category = req.body.category,
-    image1 = req.body.image1,
-    image2 = req.body.image2,
-    productObj = {
-      name: name,
-      price: price,
-      description: description,
-      category: category,
-      images: [image1, image2],
-    };
-  insertNewProduct(req, res, productObj);
+  insertNewProduct(req, res);
 });
 
 app.post(contactsRoute, (req, res) => {
@@ -74,9 +61,7 @@ app.post(contactsRoute, (req, res) => {
 });
 
 app.post(cartsRoute, (req, res) => {
-  const name = req.body.name,
-    cartObj = { name: name };
-  insertNewCart(req, res, cartObj);
+  insertNewCart(req, res);
 });
 
 app.patch(`${cartsRoute}/add/:id`, (req, res) => {

@@ -10,6 +10,7 @@ const mongoDB = require("mongodb"),
 let resultArray = [];
 let cartArray = [];
 
+
 function printToWindowByCategory(req, res, category) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
@@ -65,9 +66,9 @@ function getAllContacts(req, res) {
     }
     const currentDB = db.db(dbName);
     currentDB
-      .collection(contColl)
-      .find({})
-      .toArray((err, contacts) => {
+    .collection(contColl)
+    .find({})
+    .toArray((err, contacts) => {
         if (err) {
           console.log("error at getting all contacts");
           throw err;
@@ -75,12 +76,13 @@ function getAllContacts(req, res) {
         res.send(contacts);
         db.close();
       });
-  });
+    });
 }
 
-function insertNewProduct(req, res, productObj) {
+function insertNewProduct(req, res) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
+    const productObj = req.body;
     const currentDB = db.db(dbName);
     currentDB.collection(prodColl).insertOne(productObj, (err, product) => {
       if (err) throw err;
@@ -89,9 +91,10 @@ function insertNewProduct(req, res, productObj) {
   });
 }
 
-function insertNewCart(req, res, cartObj) {
+function insertNewCart(req, res) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
+    const cartObj = req.body;
     const currentDB = db.db(dbName);
     currentDB.collection(cartColl).insertOne(cartObj, (err, cart) => {
       if (err) throw err;
@@ -119,7 +122,7 @@ function updateProductById(req, res) {
     const id = req.params.id;
     const currentDB = db.db(dbName);
     currentDB
-      .collection(prodColl)
+    .collection(prodColl)
       .findOneAndUpdate(
         { _id: ObjectId(id) },
         { $set: dataToUpdate },
@@ -128,7 +131,7 @@ function updateProductById(req, res) {
           res.send(resUpdated);
           db.close();
         }
-      );
+        );
   });
 }
 
@@ -158,51 +161,49 @@ function addToCart(req, res) {
           throw err;
         }
         currentDB
-          .collection(cartColl)
-          .updateOne(
-            { _id: ObjectId(idCart) },
+        .collection(cartColl)
+        .updateOne(
+          { _id: ObjectId(idCart) },
             { $push: { products: prod } },
             (err, product) => {
               if (err) throw err;
               res.send(product);
             }
           );
-      });
+        });
   });
 }
 
 function deleteFromCart(req, res) {
-  MongoClient.connect((err, db) => {
+  MongoClient.connect(url, (err, db) => {
     if (err) throw err;
     const currentDB = db.db(dbName);
     const productId = req.body._id;
     const theCartId = req.params.id;
     currentDB
-      .collection(cartColl)
-      .find({ _id: ObjectId(theCartId) }, (err, foundCart) => {
-        if (err) throw err;
-
-        const cartData = foundCart;
-      })
-      .find({ _id: ObjectId(productId) }, (err, foundProd) => {
-        if (err) throw err;
-        console.log(foundProd);
-        // foundProd.updateOne(
-        //   { _id: ObjectId(productId) },
-        //   { $pull: { cartData: foundProd } },
-        //   (err, newCart) => {
-        //     if (err) throw err;
-        //     console.log(newCart);
-        //   }
-        // );
+    .collection(prodColl)
+      .findOne({ _id: ObjectId(productId) }, (err, prod) => {
+        if (err) {
+          throw err;
+        }
+        currentDB
+        .collection(cartColl)
+          .updateOne(
+            { _id: ObjectId(theCartId) },
+            { $pull: { products: prod } },
+            (err, product) => {
+              if (err) throw err;
+              res.send(product);
+            }
+            );
       });
-  });
-}
-
-module.exports = {
-  printToWindowByCategory,
-  getAllProducts,
-  getAllContacts,
+    });
+  }
+  
+  module.exports = {
+    printToWindowByCategory,
+    getAllProducts,
+    getAllContacts,
   getCartById,
   insertNewProduct,
   insertNewCart,
