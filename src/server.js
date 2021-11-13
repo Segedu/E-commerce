@@ -1,11 +1,11 @@
-const express = require("express"),
-  path = require("path"),
+const express = require("express");
+require("dotenv").config();
+const path = require("path"),
   publicPath = path.join(__dirname, "..", "public"),
   app = express(),
   productsRoute = "/products",
   cartsRoute = "/carts",
   contactsRoute = "/contacts",
-  PORT = 8080,
   {
     printToWindowByCategory,
     getAllProducts,
@@ -80,7 +80,7 @@ app.delete(`${productsRoute}/:id`, (req, res) => {
   const id = req.params.id;
   deleteProductById(req, res, id);
 });
-
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`app is listening on port: ${PORT} http://localhost:8080/`);
 });

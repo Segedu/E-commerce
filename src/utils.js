@@ -4,12 +4,11 @@ const mongoDB = require("mongodb"),
   prodColl = "products",
   contColl = "contacts",
   cartColl = "carts",
-  url = "mongodb://localhost:27017/",
+  url = process.env.MONGO_URL || "mongodb://localhost:27017/",
   dbName = "E-commerce";
 
 let resultArray = [];
 let cartArray = [];
-
 
 function printToWindowByCategory(req, res, category) {
   MongoClient.connect(url, (err, db) => {
@@ -66,9 +65,9 @@ function getAllContacts(req, res) {
     }
     const currentDB = db.db(dbName);
     currentDB
-    .collection(contColl)
-    .find({})
-    .toArray((err, contacts) => {
+      .collection(contColl)
+      .find({})
+      .toArray((err, contacts) => {
         if (err) {
           console.log("error at getting all contacts");
           throw err;
@@ -76,7 +75,7 @@ function getAllContacts(req, res) {
         res.send(contacts);
         db.close();
       });
-    });
+  });
 }
 
 function insertNewProduct(req, res) {
@@ -122,7 +121,7 @@ function updateProductById(req, res) {
     const id = req.params.id;
     const currentDB = db.db(dbName);
     currentDB
-    .collection(prodColl)
+      .collection(prodColl)
       .findOneAndUpdate(
         { _id: ObjectId(id) },
         { $set: dataToUpdate },
@@ -131,7 +130,7 @@ function updateProductById(req, res) {
           res.send(resUpdated);
           db.close();
         }
-        );
+      );
   });
 }
 
@@ -161,16 +160,16 @@ function addToCart(req, res) {
           throw err;
         }
         currentDB
-        .collection(cartColl)
-        .updateOne(
-          { _id: ObjectId(idCart) },
+          .collection(cartColl)
+          .updateOne(
+            { _id: ObjectId(idCart) },
             { $push: { products: prod } },
             (err, product) => {
               if (err) throw err;
               res.send(product);
             }
           );
-        });
+      });
   });
 }
 
@@ -181,13 +180,13 @@ function deleteFromCart(req, res) {
     const productId = req.body._id;
     const theCartId = req.params.id;
     currentDB
-    .collection(prodColl)
+      .collection(prodColl)
       .findOne({ _id: ObjectId(productId) }, (err, prod) => {
         if (err) {
           throw err;
         }
         currentDB
-        .collection(cartColl)
+          .collection(cartColl)
           .updateOne(
             { _id: ObjectId(theCartId) },
             { $pull: { products: prod } },
@@ -195,15 +194,15 @@ function deleteFromCart(req, res) {
               if (err) throw err;
               res.send(product);
             }
-            );
+          );
       });
-    });
-  }
-  
-  module.exports = {
-    printToWindowByCategory,
-    getAllProducts,
-    getAllContacts,
+  });
+}
+
+module.exports = {
+  printToWindowByCategory,
+  getAllProducts,
+  getAllContacts,
   getCartById,
   insertNewProduct,
   insertNewCart,
