@@ -139,6 +139,15 @@ table {
 }
 .messPara {
   margin: 4%;
+  font-size: larger;
+}
+#submitBtn {
+  background-color: var(--blue);
+  border-radius: 4px;
+  margin-left: 5%;
+  padding: 1%;
+  font-size: larger;
+  color: var(--white);
 }
 @keyframes homePageTitle {
   0% {
