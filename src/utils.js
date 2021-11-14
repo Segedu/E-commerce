@@ -10,7 +10,7 @@ const mongoDB = require("mongodb"),
 let resultArray = [];
 let cartArray = [];
 
-function printToWindowByCategory(req, res, category) {
+function getProductsByCategory(req, res, category) {
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
     const currentDB = db.db(dbName);
@@ -200,7 +200,7 @@ function deleteFromCart(req, res) {
 }
 
 module.exports = {
-  printToWindowByCategory,
+  getProductsByCategory,
   getAllProducts,
   getAllContacts,
   getCartById,

@@ -1,18 +1,20 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/contactStyle.css" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/categories.css" />
-    <title>Document</title>
+    <title>living room</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/categories.css" />
+    <script
+      src="https://kit.fontawesome.com/3f63fe4456.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <header>
       <ul class="navBarCont" id="navLinks">
-        <a class="active" href="index.html">Home Page</a>
+        <a class="active" href="/index.html">Home Page</a>
         <a href="livingroom.html">Living Room</a>
         <a href="bedroom.html">Bed Room</a>
         <a href="kitchen.html">Kitchen</a>
@@ -36,26 +38,30 @@
       </ul>
     </header>
     <main>
-      <form id="contactForm">
-        <section id="formSect">
-          <h1>Contact Me</h1>
-          <input type="text" placeholder="Full Name" id="Full Name" />
-          <input type="text" placeholder="Email" id="Email" />
-          <input type="text" placeholder="Message" id="message" /><br /><br />
-          <input type="submit" value="SEND" id="submit" />
-        </section>
-        <section id="myDetails">
-          <a href="https://github.com/Segedu">Github</a>
-          <a href="www.linkedin.com/in/segedu-abe">Linkedin</a>
-          <a href="#">segedu.abe@gmail.com</a>
-        </section>
+      <div id="homePageBG">
+        <img
+          src="https://cdn.pixabay.com/photo/2020/02/06/18/56/house-4825225_960_720.jpg"
+          alt="living room"
+        />
+      </div>
+      <form id="updateProductForm">
+        <input type="text" placeholder="product ID" id="ID" />
+        <input type="text" placeholder="product name" id="name" />
+        <input type="text" placeholder="price" id="price" />
+        <input type="text" placeholder="description" id="description" />
+        <input type="text" placeholder="category" id="category" />
+        <input type="text" placeholder="image link 1" id="imageOne" />
+        <input type="text" placeholder="image link 2" id="imageTwo" />
+        <input type="submit" value="update product" /><br /><br />
       </form>
+      <div id="livingRoomCont"></div>
+      <a href="#"><i class="fas fa-chevron-up"></i></a>
     </main>
     <footer>
-      <a class="navBrand" href="">About us</a>
+      <a class="navBrand" href="#">About us</a>
       <a class="navBrand" href="#">Branches</a>
-      <a class="navBrand" href="">Contact</a>
-      <a class="navBrand" href="">Work with us</a>
+      <a class="navBrand" href="#">Contact</a>
+      <a class="navBrand" href="#">Work with us</a>
       <a class="navBrand" href="https://www.facebook.com/" target="blank"
         ><img src="https://did.li/akTfT" alt="facebook logo"
       /></a>
@@ -74,11 +80,12 @@
       <span>© 2021 Segedu Abe. All rights reserved</span>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./js/client.js"></script>
+    <script src="/js/client.js"></script>
     <script>
       document
-        .getElementById("contactForm")
-        .addEventListener("submit", insertNewContact);
+        .getElementById("updateProductForm")
+        .addEventListener("submit", updateProductById);
+      getByCategory("livingRoom");
     </script>
   </body>
 </html>

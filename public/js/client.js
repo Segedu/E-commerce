@@ -1,4 +1,4 @@
-function axiosByCategory(route) {
+function getByCategory(route) {
   const divName = `${route}Cont`,
     productsRoute = "/products";
   axios
@@ -7,14 +7,14 @@ function axiosByCategory(route) {
       if (response.status == 200) {
         let products = response.data;
         let productCont = document.getElementById(divName);
-        printToWindowByCategory(productCont, products);
+        showToWindowByCategory(productCont, products);
       }
     })
     .catch(function (error) {
       console.log("you are in getting products catch");
     });
 }
-function printToWindowByCategory(divElement, resultArray) {
+function showToWindowByCategory(divElement, resultArray) {
   for (let i = 0; i < resultArray.length; i++) {
     divElement.innerHTML += `<section>
       <img src="${resultArray[i].images[0]}"/>
@@ -22,7 +22,7 @@ function printToWindowByCategory(divElement, resultArray) {
       <p>${resultArray[i].name}</p>
       <p>${resultArray[i].description}</p>
       <h1>${resultArray[i].price + " ₪"}</h1>
-      <button onclick="axiosAddToCart('${resultArray[i]._id}')" id="addBtn">
+      <button onclick="addToCart('${resultArray[i]._id}')" id="addBtn">
       add to cart</button>
       <button onclick="deleteProductById('${
         resultArray[i]._id
@@ -34,13 +34,14 @@ function printToWindowByCategory(divElement, resultArray) {
   }
 }
 
-function axiosAddToCart(productId) {
+function addToCart(productId) {
   axios
     .patch("/carts/add/6183162cd7907e590851e05a", {
       _id: productId,
     })
     .then(function (response) {
       console.log(response);
+      alert("The product added successfully");
     })
     .catch(function (error) {
       console.log("you are in add to cart catch");
@@ -108,6 +109,7 @@ function updateProductById(e) {
     })
     .then(function (response) {
       console.log(response);
+      alert("The product updated successfully");
     })
     .catch(function (error) {
       console.log("you are in update product by Id catch");
@@ -116,9 +118,11 @@ function updateProductById(e) {
 
 function deleteProductById(id) {
   axios
-    .delete(`/products/${id}`)
+    .delete(`/products/${id}`, alert("are you sure?"))
     .then(function (response) {
-      console.log(response.data);
+      if (response.status == 200) {
+        console.log(response.data);
+      }
     })
     .catch(function (error) {
       console.log("you are in the delete by ID catch");

@@ -7,7 +7,7 @@ const path = require("path"),
   cartsRoute = "/carts",
   contactsRoute = "/contacts",
   {
-    printToWindowByCategory,
+    getProductsByCategory,
     getAllProducts,
     getAllContacts,
     getCartById,
@@ -25,19 +25,19 @@ app.use(express.json());
 app.use(express.static(publicPath));
 
 app.get(`${productsRoute}/kitchen`, (req, res) => {
-  printToWindowByCategory(req, res, "kitchen");
+  getProductsByCategory(req, res, "kitchen");
 });
 
 app.get(`${productsRoute}/bedroom`, (req, res) => {
-  printToWindowByCategory(req, res, "bedroom");
+  getProductsByCategory(req, res, "bedroom");
 });
 
 app.get(`${productsRoute}/bath`, (req, res) => {
-  printToWindowByCategory(req, res, "bath");
+  getProductsByCategory(req, res, "bath");
 });
 
 app.get(`${productsRoute}/livingRoom`, (req, res) => {
-  printToWindowByCategory(req, res, "livingRoom");
+  getProductsByCategory(req, res, "livingRoom");
 });
 
 app.get(productsRoute, (req, res) => {
@@ -80,7 +80,7 @@ app.delete(`${productsRoute}/:id`, (req, res) => {
   const id = req.params.id;
   deleteProductById(req, res, id);
 });
-const PORT = process.env.PORT;
+const PORT = 8080;
 app.listen(PORT, () => {
   console.log(`app is listening on port: ${PORT} http://localhost:8080/`);
 });

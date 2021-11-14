@@ -10,9 +10,11 @@ function getCartById() {
   axios
     .get("/carts/6183162cd7907e590851e05a")
     .then(function (response) {
-      cartArray = response.data.products;
-      printUpdatedCart(cartArray);
-      console.log("cart array:", cartArray);
+      if (response.status == 200) {
+        cartArray = response.data.products;
+        showUpdatedCart(cartArray);
+        console.log("cart array:", cartArray);
+      }
     })
     .catch(function (error) {
       console.log("you are in get cart by id catch");
@@ -20,7 +22,7 @@ function getCartById() {
     });
 }
 
-function printUpdatedCart(cartArray) {
+function showUpdatedCart(cartArray) {
   for (let i = 0; i < cartArray.length; i++) {
     dataTable.innerHTML += `<tr id="${cartArray[i]._id}">
       <td>
@@ -29,7 +31,7 @@ function printUpdatedCart(cartArray) {
       <p>${cartArray[i].price}₪</p>
       <input oninput="changeQuantity()" class="quantity" type="number" value="1">
       <h1 class="priceCont">${cartArray[i].price}₪</h1>
-      <button onclick="axiosDeleteProdFromCart('${cartArray[i]._id}')" id="removeBtn">
+      <button onclick="deleteProdFromCart('${cartArray[i]._id}')" id="removeBtn">
       <i class="fas fa-trash-alt"></i></button></article></td>  
       </tr> `;
     quantityArr.push(cartArray[i]);
@@ -52,17 +54,19 @@ function changeQuantity() {
   console.log("quantity array:", quantityArr);
 }
 
-function axiosDeleteProdFromCart(productId) {
+function deleteProdFromCart(productId) {
   axios
     .patch(`/carts/delete/6183162cd7907e590851e05a`, {
       _id: productId,
     })
     .then(function (response) {
-      console.log(response.data);
-      deleteFromCart(productId);
+      console.log("hey");
+      if (response.status == 200) {
+        deleteFromCart(productId);
+      }
     })
     .catch(function (error) {
-      console.log("you are in the update cart catch");
+      console.log("you are in the delete product from cart catch");
       console.log(error);
     });
 }

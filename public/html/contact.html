@@ -4,18 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>bath page</title>
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/categories.css" />
-    <script
-      src="https://kit.fontawesome.com/3f63fe4456.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="/css/contactStyle.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/categories.css" />
+    <title>Document</title>
   </head>
   <body>
     <header>
       <ul class="navBarCont" id="navLinks">
-        <a class="active" href="index.html">Home Page</a>
+        <a class="active" href="/index.html">Home Page</a>
         <a href="livingroom.html">Living Room</a>
         <a href="bedroom.html">Bed Room</a>
         <a href="kitchen.html">Kitchen</a>
@@ -39,21 +36,26 @@
       </ul>
     </header>
     <main>
-      <div id="homePageBG">
-        <img
-          src="https://cdn.pixabay.com/photo/2017/01/15/16/18/bathroom-1981999_960_720.jpg"
-          alt="bath"
-        />
-      </div>
-      <div id="bathCont"></div>
-
-      <a href="#"><i class="fas fa-chevron-up"></i></a>
+      <form id="contactForm">
+        <section id="formSect">
+          <h1>Contact Me</h1>
+          <input type="text" placeholder="Full Name" id="Full Name" />
+          <input type="text" placeholder="Email" id="Email" />
+          <input type="text" placeholder="Message" id="message" /><br /><br />
+          <input type="submit" value="SEND" id="submit" />
+        </section>
+        <section id="myDetails">
+          <a href="https://github.com/Segedu">Github</a>
+          <a href="www.linkedin.com/in/segedu-abe">Linkedin</a>
+          <a href="#">segedu.abe@gmail.com</a>
+        </section>
+      </form>
     </main>
     <footer>
-      <a class="navBrand" href="#">About us</a>
+      <a class="navBrand" href="">About us</a>
       <a class="navBrand" href="#">Branches</a>
-      <a class="navBrand" href="#">Contact</a>
-      <a class="navBrand" href="#">Work with us</a>
+      <a class="navBrand" href="">Contact</a>
+      <a class="navBrand" href="">Work with us</a>
       <a class="navBrand" href="https://www.facebook.com/" target="blank"
         ><img src="https://did.li/akTfT" alt="facebook logo"
       /></a>
@@ -72,9 +74,11 @@
       <span>© 2021 Segedu Abe. All rights reserved</span>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./js/client.js"></script>
+    <script src="/js/client.js"></script>
     <script>
-      axiosByCategory("bath");
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", insertNewContact);
     </script>
   </body>
 </html>
