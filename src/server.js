@@ -80,7 +80,7 @@ app.delete(`${productsRoute}/:id`, (req, res) => {
   const id = req.params.id;
   deleteProductById(req, res, id);
 });
-const PORT = 8080;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`app is listening on port: ${PORT} http://localhost:8080/`);
 });
